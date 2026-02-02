@@ -10,7 +10,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Vite for Tailwind v3 -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if(file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="/build/assets/app.css">
+        <script type="module" src="/build/assets/app.js"></script>
+    @endif
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>

@@ -13,7 +13,7 @@ class HomeController
             $featuredProjects = Project::where('featured', true)
                 ->where('published', true)
                 ->orderBy('sort_order')
-                ->limit(3)
+                ->limit(6)
                 ->get();
 
             $skills = Skill::orderBy('sort_order')->get();

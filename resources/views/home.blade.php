@@ -101,16 +101,28 @@
 </section>
 
 <!-- Latest Projects Section -->
-<section class="py-24 bg-slate-50 dark:bg-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Latest Projects</h2>
-            <p class="text-slate-500 dark:text-slate-400">Some of my recent work</p>
+<section class="py-24 bg-slate-50 dark:bg-black overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="flex justify-between items-end">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Latest Projects</h2>
+                <p class="text-slate-500 dark:text-slate-400">Some of my recent work</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <button class="prev-project p-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="next-project p-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
         </div>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="relative w-full">
+        <div class="projects-scroll-container flex gap-6 overflow-x-auto pb-12 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
             @forelse($featuredProjects as $project)
-            <div class="group relative bg-white dark:bg-[#0B1120] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200 dark:border-white/5">
+            <div class="min-w-[300px] md:min-w-[400px] snap-center group relative bg-white dark:bg-[#0B1120] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200 dark:border-white/5 hover:-translate-y-2">
                 <!-- Image Area -->
                 <div class="h-64 overflow-hidden relative">
                     @if($project->cover_image)
@@ -138,11 +150,29 @@
                 </div>
             </div>
             @empty
-            <div class="col-span-3 text-center py-12 text-slate-500">
+            <div class="w-full text-center py-12 text-slate-500">
                 No projects found.
             </div>
             @endforelse
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.querySelector('.projects-scroll-container');
+        const prevBtn = document.querySelector('.prev-project');
+        const nextBtn = document.querySelector('.next-project');
+
+        if (container && prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                container.scrollBy({ left: -400, behavior: 'smooth' });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                container.scrollBy({ left: 400, behavior: 'smooth' });
+            });
+        }
+    });
+</script>
 @endsection
