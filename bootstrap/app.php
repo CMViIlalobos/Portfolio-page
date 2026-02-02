@@ -14,5 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Fix for "Read-only file system" log error on Vercel
+        $exceptions->reportable(function (\Throwable $e) {
+            if (isset($_ENV['VERCEL'])) {
+                return false; // Don't try to write to log file on Vercel
+            }
+        });
     })->create();
