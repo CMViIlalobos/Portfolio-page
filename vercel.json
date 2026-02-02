@@ -1,14 +1,8 @@
 {
     "version": 2,
     "framework": null,
-    "outputDirectory": ".",
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.9.0" }
-    },
-    "build": {
-        "env": {
-            "ENABLE_PHP_8_2": "1"
-        }
     },
     "routes": [
         {
@@ -16,8 +10,8 @@
             "dest": "/public/build/$1"
         },
         {
-            "src": "/(assets|css|js|images|storage|favicon.ico|favicon.svg|robots.txt)(.*)",
-            "dest": "/public/$1$2"
+            "src": "/(favicon\\.ico|robots\\.txt)",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",
@@ -30,16 +24,8 @@
         "APP_KEY": "base64:aGKWx2bdGnGL8z8bOAle3xcUBS/DNPE0zAXdhcBTCJo=",
         "APP_URL": "https://${VERCEL_URL}",
         "ASSET_URL": "https://${VERCEL_URL}",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": ":memory:"
+        "DB_DATABASE": ":memory:",
+        "LOG_CHANNEL": "stderr"
     }
 }
