@@ -8,14 +8,19 @@ class ProjectController
 {
     public function index()
     {
-        $projects = Project::where('published', true)
-            ->orderBy('sort_order')
-            ->paginate(9);
+        try {
+            $projects = Project::where('published', true)
+                ->orderBy('sort_order')
+                ->paginate(9);
 
-        $categories = Project::where('published', true)
-            ->select('category')
-            ->distinct()
-            ->pluck('category');
+            $categories = Project::where('published', true)
+                ->select('category')
+                ->distinct()
+                ->pluck('category');
+        } catch (\Exception $e) {
+            $projects = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 9);
+            $categories = collect([]);
+        }
 
         return view('projects.index', compact('projects', 'categories'));
     }
