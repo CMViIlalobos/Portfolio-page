@@ -14,17 +14,17 @@ $app = Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // Prevent reporting to log files on Vercel to avoid Read-only errors
+        // Fix for "Read-only file system" log error on Vercel
         $exceptions->reportable(function (\Throwable $e) {
             if (isset($_ENV['VERCEL']) || isset($_ENV['AWS_LAMBDA_FUNCTION_VERSION'])) {
-                return false;
+                return false; // Don't try to write to log file on Vercel
             }
         });
     })->create();
 
 // Critical Fix for Vercel/Serverless: Move storage path to /tmp
-// This prevents "Read-only file system" errors during boot
-if (isset($_ENV['VERCEL']) || isset($_ENV['AWS_LAMBDA_FUNCTION_VERSION'])) {
+// ONLY apply this if we are truly in a serverless environment
+if (isset($_ENV['VERCEL']) || isset($_ENV['AWS_LAMBDA_FUNCTION_VERSION']) || isset($_SERVER['VERCEL'])) {
     $app->useStoragePath('/tmp');
     
     // Ensure the structure exists in /tmp
