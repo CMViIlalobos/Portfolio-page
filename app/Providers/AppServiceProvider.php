@@ -19,8 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production to avoid mixed content errors on Vercel
         if($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
+
+        // Fix for "Target class [hash] does not exist" on serverless
+        // This sometimes happens if providers aren't fully loaded in the lambda environment
     }
 }
