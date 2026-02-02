@@ -1,7 +1,5 @@
-node_modules
-build
-dist
+/vendor
+/node_modules
+/storage/*.key
+.env
 .git
-.trae
-.log
-.figma
