@@ -32,8 +32,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_KEY": "base64:aGKWx2bdGnGL8z8bOAle3xcUBS/DNPE0zAXdhcBTCJo=",
+        "APP_DEBUG": "false",
         "APP_URL": "https://${VERCEL_URL}",
         "ASSET_URL": "https://${VERCEL_URL}",
         "DB_CONNECTION": "sqlite",
@@ -47,6 +46,7 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
-        "QUEUE_CONNECTION": "sync"
+        "QUEUE_CONNECTION": "sync",
+        "FILESYSTEM_DISK": "public"
     }
 }
