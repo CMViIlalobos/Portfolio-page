@@ -2,148 +2,74 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Project;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
 
 class ProjectSeeder extends Seeder
 {
     public function run(): void
     {
-        // Optional: Clear existing projects to avoid duplicates if re-running
-        // DB::table('projects')->truncate(); 
-        // Note: Truncate can be dangerous in production, but fine for dev setup.
-        // For now, I'll just check if they exist or I'll just rely on the user saying it's empty.
-        // Safest is to just create them.
-
         $projects = [
             [
-                'title' => 'Smart POS & Inventory System',
-                'slug' => 'smart-pos-inventory',
-                'excerpt' => 'A comprehensive Point of Sale and Inventory management system for retail businesses.',
-                'description' => "A robust Point of Sale (POS) and Inventory Management System designed to streamline retail operations. \n\nKey features include:\n- Real-time inventory tracking with low stock alerts\n- Barcode scanning support\n- Sales reporting and analytics dashboard\n- Multi-branch support\n- User role management (Admin, Cashier, Manager)\n- Invoice generation and thermal printing support",
-                'category' => 'Web Application',
-                'technologies' => json_encode(['Laravel', 'Vue.js', 'MySQL', 'Tailwind CSS', 'Chart.js']),
+                'title' => 'Baby Day Tracker',
+                'slug' => 'baby-day-tracker',
+                'excerpt' => 'A calm Flutter care companion for feeding, sleep, diapers, vaccines, appointments, memories, reminders, and pediatrician-ready exports.',
+                'description' => "Baby Day Tracker is a mobile-first care log built around the real rhythm of parents and caregivers.\n\nThe app includes home summaries, feeding and sleep trackers, diaper and health logs, vaccine schedules, calendar appointments, reminders, memories, milestones, baby book exports, local notifications, JSON backup, and pediatrician-friendly PDF export.\n\nUX direction: soft pastel surfaces, rounded touch targets, reassuring copy, low-stress navigation, and marketing screenshots that show the app as a calm daily companion rather than a clinical tracker.",
+                'category' => 'Mobile App',
+                'technologies' => ['Flutter', 'Dart', 'Riverpod', 'Hive', 'Local Notifications', 'PDF Export'],
                 'featured' => true,
                 'published' => true,
                 'sort_order' => 1,
                 'demo_url' => '#',
-                'github_url' => '#',
+                'github_url' => 'https://github.com/CMViIlalobos/baby_day_tracker',
                 'published_at' => now(),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern+dashboard+interface+of+point+of+sale+system+dark+mode+analytics+charts+product+list&image_size=landscape_16_9',
-                'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=pos+system+checkout+screen+dark+mode+retail+interface&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=inventory+management+dashboard+dark+ui+stock+levels&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=sales+analytics+report+charts+dark+theme+dashboard&image_size=landscape_16_9'
-                ]
+                'cover_image' => 'project-assets/baby-day-phone-collage-classic.png',
+                'images' => [],
             ],
             [
-                'title' => 'HealthCare Appointment Platform',
-                'slug' => 'healthcare-appointment-platform',
-                'excerpt' => 'Telemedicine and booking platform connecting patients with doctors.',
-                'description' => "An integrated healthcare platform that simplifies the process of booking appointments with doctors. \n\nFeatures:\n- Doctor search by specialty and availability\n- Online appointment booking and rescheduling\n- Video consultation integration (WebRTC)\n- Electronic Health Records (EHR) for patients\n- Automated email and SMS reminders\n- Secure payment gateway for consultation fees",
-                'category' => 'Web Application',
-                'technologies' => json_encode(['Laravel', 'Livewire', 'Alpine.js', 'PostgreSQL', 'Stripe']),
+                'title' => 'HRIS',
+                'slug' => 'hris',
+                'excerpt' => 'A large Laravel HR operations platform for employee records, PDS data, plantilla, recruitment, competency, reports, monitoring, and admin controls.',
+                'description' => "HRIS is an operations-heavy Laravel system shaped around employee data and internal HR workflows.\n\nThe real interface includes a branded PPA HRIS login, a dark left navigation shell, global module search, notification access, RSP dashboard cards, responsibility-center charts, employee personal information forms, exportable PDS records, and TRoPPA probationary monitoring analytics.\n\nThe repo also includes module management, maintenance mode, real-time monitoring, system diagnostics, user and permission management, HRMD library files, employee details, PDS sections, plantilla inventory, historical plantilla uploads, position codes, recruitment analytics, calendars, custom report builders, talent bank records, appointees, competency assessment, learning and development, notifications, global search, and export/report flows.\n\nUX direction: dense but scannable dashboards, predictable tables and filters, role-aware navigation, clear warning states before destructive navigation, and administrative screens built for repeated daily use.",
+                'category' => 'Enterprise System',
+                'technologies' => ['Laravel', 'PHP', 'MySQL', 'Blade', 'Bootstrap', 'ApexCharts', 'Echo'],
                 'featured' => true,
                 'published' => true,
                 'sort_order' => 2,
                 'demo_url' => '#',
-                'github_url' => '#',
-                'published_at' => now()->subDays(5),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern+healthcare+platform+homepage+doctor+booking+clean+blue+ui&image_size=landscape_16_9',
+                'github_url' => 'https://github.com/Josh362016/ppa_hris_2025',
+                'published_at' => now()->subDays(8),
+                'cover_image' => 'project-assets/hris-dashboard.png',
                 'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=doctor+profile+page+appointment+booking+calendar+clean+ui&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=patient+dashboard+medical+records+health+stats+clean+interface&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=telemedicine+video+call+interface+doctor+patient+consultation&image_size=landscape_16_9'
-                ]
+                    'project-assets/hris-login.png',
+                    'project-assets/hris-pds.png',
+                    'project-assets/hris-troppa.png',
+                ],
             ],
             [
-                'title' => 'Real-Estate Property Marketplace',
-                'slug' => 'real-estate-marketplace',
-                'excerpt' => 'Modern property listing platform with map integration and virtual tours.',
-                'description' => "A high-performance real estate marketplace allowing agents to list properties and buyers to find their dream homes.\n\nHighlights:\n- Interactive map search (Google Maps API)\n- 360-degree virtual tour support\n- Advanced filtering (Price, Location, Amenities)\n- Agent dashboard for lead management\n- Saved searches and property alerts\n- SEO optimized property pages",
-                'category' => 'Web Application',
-                'technologies' => json_encode(['Laravel', 'Inertia.js', 'React', 'Redis', 'Google Maps API']),
+                'title' => 'ORAS of PPA',
+                'slug' => 'oras-of-ppa',
+                'excerpt' => 'A Laravel + React/Inertia public-service travel appointment and QR verification system for PPA passenger and vessel workflows.',
+                'description' => "ORAS of PPA is a public-service workflow system for travel appointments, passenger registration, OTP verification, QR generation, QR scanning, vessel schedules, reservations, walk-ins, travel history, PPA dashboards, executive analytics, shipping-line views, and admin controls.\n\nThe real entry screen presents government and agency branding, a clear ORAS identity, current environment status, bilingual language selection, Privacy Notice, EULA, Help links, and an eligibility warning for RoRo passengers before users begin.\n\nThe repo includes Laravel Fortify, Inertia React pages, TypeScript, Tailwind, Radix UI components, Lucide icons, OTP throttling, queued mail notifications, QR expiration rules, schedule-change notifications, protected media, activity logs, and k6 performance test flows.\n\nUX direction: trustworthy government-branded public entry flows, clear schedule selection, privacy-first onboarding, dependable OTP and QR states, verifier-first scanning screens, and operations dashboards that separate public registration from internal monitoring.",
+                'category' => 'Government Workflow',
+                'technologies' => ['Laravel', 'Inertia React', 'TypeScript', 'Tailwind CSS', 'Fortify', 'QR/OTP'],
                 'featured' => true,
                 'published' => true,
                 'sort_order' => 3,
                 'demo_url' => '#',
-                'github_url' => '#',
-                'published_at' => now()->subDays(10),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern+real+estate+website+homepage+luxury+homes+hero+section&image_size=landscape_16_9',
+                'github_url' => 'https://github.com/iceaceice/otaqs',
+                'published_at' => now()->subDays(14),
+                'cover_image' => 'project-assets/oras-language-selection.png',
                 'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=property+listing+page+grid+view+filters+map+clean+ui&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=property+details+page+gallery+virtual+tour+agent+contact&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=real+estate+agent+dashboard+leads+analytics+dark+mode&image_size=landscape_16_9'
-                ]
+                    'project-assets/oras-final-960.png',
+                ],
             ],
-            [
-                'title' => 'LMS - E-Learning Portal',
-                'slug' => 'lms-elearning-portal',
-                'excerpt' => 'Learning Management System for online courses and student progress tracking.',
-                'description' => "A scalable Learning Management System (LMS) for educational institutions and online instructors.\n\nCore Functionalities:\n- Course creation and curriculum management\n- Video lesson hosting and streaming\n- Student quizzes and assessments\n- Progress tracking and certification\n- Discussion forums for peer interaction\n- Subscription-based revenue model",
-                'category' => 'Education',
-                'technologies' => json_encode(['Laravel', 'Vue.js', 'Video.js', 'MySQL', 'AWS S3']),
-                'featured' => false,
-                'published' => true,
-                'sort_order' => 4,
-                'demo_url' => '#',
-                'github_url' => '#',
-                'published_at' => now()->subDays(15),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=online+learning+platform+course+dashboard+video+player+modern+ui&image_size=landscape_16_9',
-                'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=student+dashboard+progress+tracking+courses+grid+clean+interface&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=course+curriculum+view+video+lesson+sidebar+modern+ui&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=online+quiz+interface+multiple+choice+timer+clean+design&image_size=landscape_16_9'
-                ]
-            ],
-            [
-                'title' => 'FinTrack - Expense Manager',
-                'slug' => 'fintrack-expense-manager',
-                'excerpt' => 'Personal finance tracker with budget planning and visual insights.',
-                'description' => "A personal finance application helping users track expenses, set budgets, and visualize spending habits.\n\nIncludes:\n- Expense categorization and tagging\n- Monthly budget planning tools\n- Visual charts for spending analysis\n- Recurring transaction support\n- Multi-currency support\n- Data export to CSV/PDF",
-                'category' => 'Mobile/Web',
-                'technologies' => json_encode(['Laravel API', 'Flutter', 'SQLite', 'Firebase Auth']),
-                'featured' => false,
-                'published' => true,
-                'sort_order' => 5,
-                'demo_url' => '#',
-                'github_url' => '#',
-                'published_at' => now()->subDays(20),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=personal+finance+dashboard+dark+mode+expense+tracker+charts&image_size=landscape_16_9',
-                'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=mobile+app+expense+tracker+list+view+clean+dark+ui&image_size=portrait_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=budget+planning+screen+progress+bars+clean+interface&image_size=portrait_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=financial+reports+pie+charts+spending+analysis+dark+mode&image_size=portrait_16_9'
-                ]
-            ],
-            [
-                'title' => 'SocialConnect API',
-                'slug' => 'social-connect-api',
-                'excerpt' => 'RESTful API backend for a social networking mobile application.',
-                'description' => "A high-performance RESTful API built to power a social networking mobile app.\n\nTechnical Specs:\n- OAuth2 Authentication (Passport/Sanctum)\n- Endpoints for user profiles, posts, comments, and likes\n- Real-time notification system using Pusher\n- Image optimization and storage\n- Rate limiting and security middleware\n- Comprehensive API documentation (Swagger/OpenAPI)",
-                'category' => 'Backend API',
-                'technologies' => json_encode(['Laravel', 'Redis', 'Docker', 'Swagger', 'PHPUnit']),
-                'featured' => false,
-                'published' => true,
-                'sort_order' => 6,
-                'demo_url' => '',
-                'github_url' => '#',
-                'published_at' => now()->subDays(25),
-                'cover_image' => 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=api+documentation+swagger+ui+dark+mode+code+snippets&image_size=landscape_16_9',
-                'images' => [
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=postman+api+testing+interface+json+response+dark+theme&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=database+schema+diagram+relationship+visualizer+dark+mode&image_size=landscape_16_9',
-                    'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=server+metrics+dashboard+terminal+logs+monitoring&image_size=landscape_16_9'
-                ]
-            ]
         ];
 
+        Project::whereNotIn('slug', collect($projects)->pluck('slug'))->delete();
+
         foreach ($projects as $project) {
-            Project::updateOrCreate(
-                ['slug' => $project['slug']], // Check by slug to avoid duplicates
-                $project
-            );
+            Project::updateOrCreate(['slug' => $project['slug']], $project);
         }
     }
 }

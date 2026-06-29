@@ -3,211 +3,208 @@
 @section('title', 'Home')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative min-h-screen flex items-center pt-24 bg-slate-50 dark:bg-black overflow-hidden">
-    <!-- Background Gradient -->
-    <div class="absolute top-0 right-0 w-[60%] h-[80%] bg-gradient-to-b from-indigo-50/50 to-transparent dark:from-indigo-900/10 dark:to-transparent rounded-bl-[200px] z-0 pointer-events-none"></div>
+@php
+    $signatureProjects = $featuredProjects->take(3)->values();
+    $stack = ['Laravel', 'PHP', 'Flutter', 'MySQL', 'SQLite', 'Tailwind CSS', 'Alpine.js', 'REST APIs'];
+    $caseStudyPanels = [
+        [
+            'label' => 'Problem',
+            'title' => 'Unclear products lose users.',
+            'body' => 'Value must land before attention drops.',
+        ],
+        [
+            'label' => 'Approach',
+            'title' => 'Lead with one path.',
+            'body' => 'Simple sections turn complex systems into quick decisions.',
+        ],
+        [
+            'label' => 'Visuals',
+            'title' => 'Show, then explain.',
+            'body' => 'Custom interface scenes carry the product story.',
+        ],
+        [
+            'label' => 'Motion',
+            'title' => 'Guide attention.',
+            'body' => 'Movement highlights progress, feedback, and action.',
+        ],
+        [
+            'label' => 'Conversion',
+            'title' => 'Make action obvious.',
+            'body' => 'CTAs sit where decisions naturally happen.',
+        ],
+        [
+            'label' => 'Outcome',
+            'title' => 'Less friction. More trust.',
+            'body' => 'Cleaner stories help people move forward.',
+        ],
+    ];
+    $toolFocus = [
+        ['label' => 'Tools', 'items' => 'Figma · Rive · React · Framer Motion'],
+        ['label' => 'Focus', 'items' => 'UI/UX · Storytelling · Conversion · Interaction'],
+    ];
+@endphp
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Left Content -->
-            <div class="text-left">
-                <p class="text-xl font-medium text-slate-700 dark:text-slate-300 mb-4">Hi, I'm Carlos Miguel</p>
-                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
-                    Creative <br/>
-                    <span class="text-indigo-600">Full-Stack</span> Developer
-                </h1>
-                <p class="text-lg text-slate-700 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
-                    I build modern and responsive web applications using Laravel, Vue.js, and modern tools to help your business grow.
-                </p>
-                
-                <div class="flex flex-wrap gap-4">
-                    <a href="{{ route('projects.index') }}" 
-                       class="px-8 py-4 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700 transition shadow-lg shadow-indigo-600/20">
-                        View My Work
-                    </a>
-                    <a href="{{ route('about') }}" 
-                       class="px-8 py-4 bg-transparent border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white font-bold rounded hover:bg-slate-100 dark:hover:bg-white/5 transition">
-                        About Me
-                    </a>
+<section class="portfolio-film section-wrap py-10 md:py-14">
+    <div class="film-browser" data-browser-showcase>
+        <div class="film-browser-bar">
+            <div class="flex items-center gap-2">
+                <span class="bg-slate-300"></span>
+                <span class="bg-amber-300"></span>
+                <span class="bg-teal-400"></span>
+            </div>
+            <div class="film-address">carlosmiguel.portfolio</div>
+            <div class="film-menu">...</div>
+        </div>
+
+        <div class="film-grid">
+            <section class="film-panel film-intro">
+                <span class="grid-dot grid-dot-tl"></span>
+                <span class="grid-dot grid-dot-tr"></span>
+                <div class="browser-chip">Portfolio OS / 2026</div>
+                <div class="mt-auto">
+                    <p class="eyebrow mb-4">Carlos Miguel S. Villalobos</p>
+                    <h1 class="font-display text-4xl font-extrabold leading-[1.02] text-slate-950 dark:text-white sm:text-5xl md:text-7xl">
+                        <span class="block">Systems that</span>
+                        <span class="block">explain fast.</span>
+                    </h1>
+                    <p class="mt-6 max-w-xl text-base font-semibold leading-7 text-slate-600 dark:text-slate-300 md:text-lg">
+                        Clear interfaces, guided motion, and stronger product stories for real systems.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="#projects" class="btn-primary">View projects</a>
+                        <a href="{{ route('contact') }}" class="btn-secondary">Contact me</a>
+                    </div>
                 </div>
+            </section>
+
+            <section class="film-panel film-flow">
+                <span class="grid-dot grid-dot-tl"></span>
+                <span class="grid-dot grid-dot-tr"></span>
+                <div class="flex items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Interactive system layer</p>
+                        <h2 class="font-display text-xl font-extrabold text-slate-950 dark:text-white sm:text-2xl">Interfaces in motion.</h2>
+                    </div>
+                </div>
+                <div class="aicm-stage" aria-label="Animated AI interface orbit with horizontal product panels">
+                    <div class="aicm-track aicm-track-one" aria-hidden="true">
+                        <span>Data</span>
+                        <span>Signals</span>
+                        <span>Logic</span>
+                        <span>Actions</span>
+                        <span>Data</span>
+                        <span>Signals</span>
+                    </div>
+                    <div class="aicm-track aicm-track-two" aria-hidden="true">
+                        <span>HRIS</span>
+                        <span>ORAS</span>
+                        <span>Baby Tracker</span>
+                        <span>Reports</span>
+                        <span>HRIS</span>
+                    </div>
+                    <div class="aicm-core">
+                        <div class="aicm-panel">
+                            <div class="aicm-orbit"></div>
+                            <div class="aicm-chip">AI</div>
+                            <div class="aicm-lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aicm-card aicm-card-left">
+                        <strong>Live preview</strong>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="aicm-card aicm-card-right">
+                        <strong>Success state</strong>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="film-divider"></div>
+
+        <section id="projects" class="film-projects">
+            <div class="film-section-heading">
+                <p class="eyebrow mb-3">Selected case studies</p>
+                <h2 class="font-display text-3xl font-extrabold leading-tight text-slate-950 dark:text-white md:text-5xl">
+                    <span class="block">Real systems.</span>
+                    <span class="block">Clear stories.</span>
+                </h2>
             </div>
 
-            <!-- Right Image -->
-            <div class="relative">
-                <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
-                    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" 
-                         alt="Developer GIF" 
-                         class="w-full h-auto object-cover transform hover:scale-105 transition duration-700">
-                    
-                    <!-- Floating Icons -->
-                    <div class="absolute top-10 right-10 p-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 animate-bounce shadow-lg">
-                        <span class="font-bold text-white text-xs">&lt;/&gt; Code</span>
-                    </div>
-                    <div class="absolute bottom-20 left-10 p-4 bg-indigo-600/90 backdrop-blur-md rounded-xl shadow-xl border border-white/10 animate-pulse">
-                        <span class="font-bold text-white">JS</span>
-                    </div>
-                    <div class="absolute top-1/2 right-0 p-3 bg-orange-500/90 backdrop-blur-md rounded-xl shadow-xl border border-white/10 transform translate-x-1/2">
-                        <span class="font-bold text-white">HTML</span>
-                    </div>
-                </div>
-                <!-- Decorative Elements -->
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl -z-10"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl -z-10"></div>
+            <div class="film-project-grid">
+                @forelse($signatureProjects as $index => $project)
+                    @php
+                        $techArray = is_string($project->technologies) ? json_decode($project->technologies, true) : $project->technologies;
+                    @endphp
+                    <article class="film-project-card">
+                        <span class="grid-dot grid-dot-tl"></span>
+                        <span class="grid-dot grid-dot-tr"></span>
+                        <div class="browser-chip">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }} / {{ $project->category }}</div>
+                        @if(!empty($project->cover_image))
+                            <div class="film-project-media">
+                                <img src="{{ asset($project->cover_image) }}" alt="{{ $project->title }} interface preview">
+                            </div>
+                        @else
+                            <div class="line-art line-art-timeline" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        @endif
+                        <div class="mt-auto">
+                            <h3 class="font-display text-2xl font-extrabold leading-tight text-slate-950 dark:text-white">{{ $project->title }}</h3>
+                            <p class="mt-4 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{{ \Illuminate\Support\Str::words($project->excerpt, 14) }}</p>
+                            <div class="mt-5 flex flex-wrap gap-2">
+                                @foreach(array_slice($techArray ?? [], 0, 4) as $tech)
+                                    <span class="rounded border border-slate-950/10 bg-white/70 px-3 py-1 text-xs font-extrabold text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">{{ $tech }}</span>
+                                @endforeach
+                            </div>
+                            <a href="{{ route('projects.show', $project->slug) }}" class="mt-6 inline-flex text-sm font-extrabold text-slate-950 transition hover:text-teal-700 dark:text-white dark:hover:text-teal-200">Open case study -></a>
+                        </div>
+                    </article>
+                @empty
+                    <div class="film-project-card">No featured projects yet.</div>
+                @endforelse
+            </div>
+        </section>
+
+        <div class="film-divider"></div>
+
+        <section class="film-lower-grid">
+            @foreach($caseStudyPanels as $panel)
+                <article class="film-panel compact">
+                    <span class="grid-dot grid-dot-tl"></span>
+                    <div class="browser-chip">{{ $panel['label'] }}</div>
+                    <h3 class="mt-12 font-display text-2xl font-extrabold leading-tight text-slate-950 dark:text-white">{{ $panel['title'] }}</h3>
+                    <p class="mt-4 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{{ $panel['body'] }}</p>
+                </article>
+            @endforeach
+        </section>
+
+        <div class="film-divider"></div>
+
+        <section class="film-tool-grid">
+            @foreach($toolFocus as $item)
+                <article class="film-panel compact">
+                    <span class="grid-dot grid-dot-tl"></span>
+                    <div class="browser-chip">{{ $item['label'] }}</div>
+                    <h3 class="mt-12 font-display text-2xl font-extrabold leading-tight text-slate-950 dark:text-white">{{ $item['items'] }}</h3>
+                </article>
+            @endforeach
+        </section>
+
+        <div class="film-stack">
+            <div class="animate-marquee flex w-max gap-3 px-3">
+                @foreach(array_merge($stack, $stack) as $tool)
+                    <span class="rounded-md border border-slate-950/10 bg-white/80 px-4 py-2 text-sm font-extrabold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-slate-200">{{ $tool }}</span>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
-
-<!-- My Skills Section -->
-<section class="py-24 bg-slate-100 dark:bg-[#0B1120]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12">My Skills</h2>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <!-- Skill 1 -->
-            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-slate-200 dark:border-white/5 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl dark:shadow-none group">
-                <div class="w-16 h-16 bg-orange-100 dark:bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-600 dark:text-orange-500 group-hover:scale-110 transition-transform">
-                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.56l-4.07-1.13L6.85 5h10.3l-1.08 11.43L12 17.56zM4.07 3l1.32 14.86L12 21l6.61-3.14L19.93 3H4.07z"/></svg>
-                </div>
-                <span class="font-bold text-slate-700 dark:text-slate-200">HTML5 & CSS3</span>
-            </div>
-
-            <!-- Skill 2 -->
-            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-slate-200 dark:border-white/5 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl dark:shadow-none group">
-                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                </div>
-                <span class="font-bold text-slate-700 dark:text-slate-200">Responsive Design</span>
-            </div>
-
-            <!-- Skill 3 -->
-            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-slate-200 dark:border-white/5 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl dark:shadow-none group">
-                <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-500/10 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-500 group-hover:scale-110 transition-transform">
-                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-                </div>
-                <span class="font-bold text-slate-700 dark:text-slate-200">JS & Vue/React</span>
-            </div>
-
-            <!-- Skill 4 -->
-            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-slate-200 dark:border-white/5 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl dark:shadow-none group">
-                <div class="w-16 h-16 bg-red-100 dark:bg-red-500/10 rounded-2xl flex items-center justify-center text-red-600 dark:text-red-500 group-hover:scale-110 transition-transform">
-                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                </div>
-                <span class="font-bold text-slate-700 dark:text-slate-200">Laravel & PHP</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Latest Projects Section -->
-<section class="py-24 bg-slate-50 dark:bg-black overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div class="flex justify-between items-end">
-            <div>
-                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Latest Projects</h2>
-                <p class="text-slate-500 dark:text-slate-400">Some of my recent work</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="relative w-full group/container">
-        <!-- Navigation Buttons (Visible on Hover) -->
-        <button class="prev-project absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all opacity-0 group-hover/container:opacity-100 hidden md:flex">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-        <button class="next-project absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all opacity-0 group-hover/container:opacity-100 hidden md:flex">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
-
-        <div class="projects-scroll-container flex gap-6 overflow-x-auto pb-12 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
-            @forelse($featuredProjects as $project)
-            <div class="min-w-[300px] md:min-w-[400px] snap-center group relative bg-white dark:bg-[#0B1120] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200 dark:border-white/5 hover:-translate-y-2">
-                <!-- Image Area -->
-                <div class="h-64 overflow-hidden relative">
-                    @if($project->cover_image)
-                    <img src="{{ Str::startsWith($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image) }}" 
-                         alt="{{ $project->title }}" 
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    @else
-                    <div class="w-full h-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                        <span class="text-slate-400">No Image</span>
-                    </div>
-                    @endif
-                    
-                    <!-- Overlay Button -->
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <a href="{{ route('projects.show', $project->slug) }}" class="px-6 py-2 bg-indigo-600 text-white rounded font-bold hover:bg-indigo-700 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                            View Project
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Bottom Title Bar -->
-                <div class="p-4 bg-slate-900 text-white border-t border-slate-800">
-                    <h3 class="text-lg font-bold truncate">{{ $project->title }}</h3>
-                    <p class="text-slate-400 text-sm truncate">{{ $project->category }}</p>
-                </div>
-            </div>
-            @empty
-            <div class="w-full text-center py-12 text-slate-500">
-                No projects found.
-            </div>
-            @endforelse
-        </div>
-    </div>
-</section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.querySelector('.projects-scroll-container');
-        const prevBtn = document.querySelector('.prev-project');
-        const nextBtn = document.querySelector('.next-project');
-
-        // Button Navigation
-        if (container && prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                container.scrollBy({ left: -400, behavior: 'smooth' });
-            });
-
-            nextBtn.addEventListener('click', () => {
-                container.scrollBy({ left: 400, behavior: 'smooth' });
-            });
-        }
-
-        // Drag to Scroll functionality
-        if (container) {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            container.style.cursor = 'grab';
-
-            container.addEventListener('mousedown', (e) => {
-                isDown = true;
-                container.style.cursor = 'grabbing';
-                startX = e.pageX - container.offsetLeft;
-                scrollLeft = container.scrollLeft;
-            });
-
-            container.addEventListener('mouseleave', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
-
-            container.addEventListener('mouseup', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
-
-            container.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 2; // Scroll speed multiplier
-                container.scrollLeft = scrollLeft - walk;
-            });
-        }
-    });
-</script>
 @endsection

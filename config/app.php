@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\AppUrl;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -55,7 +56,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => AppUrl::resolve(),
+
+    'asset_url' => AppUrl::assetUrl(),
 
     /*
     |--------------------------------------------------------------------------

@@ -4,16 +4,14 @@
 
 @section('content')
 <div class="relative py-20 min-h-screen flex items-center">
-    <!-- Background Decoration -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[120px] -z-10"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
             
-            <!-- Contact Info -->
             <div class="flex flex-col justify-center">
                 <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">Let's work <br /><span class="text-cyan-400">together.</span></h1>
-                <p class="text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-lg">Have a project in mind or just want to say hi? I'm always open to discussing new ideas and opportunities.</p>
+                <p class="text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-lg">Send the idea. I’ll help shape the system.</p>
                 
                 <div class="space-y-8">
                     <div class="flex items-start group">
@@ -45,7 +43,6 @@
                 </div>
             </div>
 
-            <!-- Contact Form -->
             <div class="bg-slate-800/50 backdrop-blur-xl border border-slate-700 rounded-3xl p-8 lg:p-10 shadow-2xl">
                 <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                     @csrf
@@ -88,7 +85,7 @@
                     </div>
                     
                     <button type="submit"
-                            class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white py-4 px-6 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                            class="w-full bg-gradient-to-r from-teal-600 to-slate-950 text-white py-4 px-6 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] transition-all duration-300 transform hover:-translate-y-1">
                         Send Message
                     </button>
                 </form>

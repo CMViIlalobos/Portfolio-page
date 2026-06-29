@@ -3,100 +3,75 @@
 @section('title', 'Projects')
 
 @section('content')
-<div class="relative py-20">
-    <!-- Header -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">My <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">Projects</span></h1>
-        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">A showcase of my recent work, personal experiments, and open source contributions.</p>
+<section class="section-wrap py-16 md:py-20">
+    <div class="max-w-3xl reveal-up">
+        <p class="eyebrow mb-4">Selected work</p>
+        <h1 class="font-display text-5xl font-extrabold leading-tight text-slate-950 dark:text-white md:text-6xl">Built systems. Sharper stories.</h1>
+        <p class="mt-6 text-lg leading-8 text-slate-700 dark:text-slate-300">Care tracking, HR operations, and PPA workflows made easier to understand.</p>
     </div>
-    
-    <!-- Filter -->
+
     @if($categories->count() > 0)
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div class="flex flex-wrap justify-center gap-3">
-            <a href="{{ route('projects.index') }}" 
-               class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 {{ request()->routeIs('projects.index') ? 'bg-indigo-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]' : 'bg-white dark:bg-[#0B1120] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/10 hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-white shadow-sm dark:shadow-none' }}">
-                All Projects
-            </a>
+        <div class="mt-10 flex flex-wrap gap-2">
+            <a href="{{ route('projects.index') }}" class="rounded-md px-4 py-2 text-sm font-extrabold transition {{ request()->routeIs('projects.index') ? 'bg-slate-950 text-white dark:bg-white dark:text-slate-950' : 'border border-slate-950/10 bg-white/60 text-slate-700 hover:border-teal-600 hover:text-teal-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-teal-300 dark:hover:text-teal-200' }}">All</a>
             @foreach($categories as $category)
-            <a href="{{ route('projects.category', $category) }}" 
-               class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 {{ request('category') == $category ? 'bg-indigo-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]' : 'bg-white dark:bg-[#0B1120] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/10 hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-white shadow-sm dark:shadow-none' }}">
-                {{ $category }}
-            </a>
+                <a href="{{ route('projects.category', $category) }}" class="rounded-md border border-slate-950/10 bg-white/60 px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:border-teal-600 hover:text-teal-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-teal-300 dark:hover:text-teal-200">{{ $category }}</a>
             @endforeach
         </div>
-    </div>
     @endif
-    
-    <!-- Grid -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($projects as $project)
-            <div class="group bg-white dark:bg-[#0B1120] rounded-2xl overflow-hidden border border-slate-200 dark:border-white/5 hover:border-indigo-500/30 transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02] shadow-lg hover:shadow-2xl dark:shadow-none dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col h-full relative">
-                <!-- Shine Effect -->
-                <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 dark:via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-                </div>
 
-                <!-- Image/Placeholder -->
-                <div class="h-56 bg-slate-100 dark:bg-slate-900/50 relative overflow-hidden shrink-0">
-                    @if($project->cover_image)
-                    <img src="{{ Str::startsWith($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image) }}" 
-                         alt="{{ $project->title }}" 
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        @forelse($projects as $project)
+            @php
+                $techArray = is_string($project->technologies) ? json_decode($project->technologies, true) : $project->technologies;
+            @endphp
+            <article class="surface group flex min-h-[520px] flex-col overflow-hidden rounded-lg transition duration-500 hover:-translate-y-1">
+                <div class="project-visual p-5 text-white">
+                    @if(!empty($project->cover_image))
+                        <div class="h-64 overflow-hidden rounded-md border border-white/10 bg-white/10">
+                            <img src="{{ asset($project->cover_image) }}" alt="{{ $project->title }} interface preview" class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]">
+                        </div>
                     @else
-                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 dark:text-slate-700 group-hover:text-indigo-500 transition-colors">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <div class="rounded-md border border-white/10 bg-white/10 p-4 backdrop-blur">
+                        <div class="mb-5 flex items-center justify-between">
+                            <span class="rounded bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-950">{{ $project->category }}</span>
+                            @if($project->featured)
+                                <span class="text-xs font-black uppercase tracking-[0.16em] text-teal-200">Featured</span>
+                            @endif
+                        </div>
+                        <div class="grid grid-cols-4 gap-2">
+                            @for($i = 1; $i <= 16; $i++)
+                                <span class="h-9 rounded {{ $i % 4 === 0 ? 'bg-teal-300' : ($i % 5 === 0 ? 'bg-amber-300' : 'bg-white/15') }}"></span>
+                            @endfor
+                        </div>
+                        <div class="mt-5 space-y-2">
+                            <div class="h-2.5 w-11/12 rounded-full bg-white"></div>
+                            <div class="h-2.5 w-7/12 rounded-full bg-white/45"></div>
+                            <div class="h-2.5 w-9/12 rounded-full bg-white/70"></div>
+                        </div>
                     </div>
                     @endif
-                    
-                    <div class="absolute top-4 right-4">
-                         <span class="px-3 py-1 bg-white/90 dark:bg-black/50 backdrop-blur-md border border-slate-200 dark:border-white/10 text-indigo-600 dark:text-indigo-300 rounded-full text-xs font-medium shadow-sm">
-                            {{ $project->category }}
-                        </span>
-                    </div>
                 </div>
-                
-                <div class="p-8 flex flex-col flex-grow">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ $project->title }}</h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 line-clamp-3 text-sm leading-relaxed flex-grow">{{ Str::limit($project->excerpt, 120) }}</p>
-                    
-                    <div class="flex flex-wrap gap-2 mb-8">
-                        @php
-                            $techArray = $project->technologies;
-                            if (is_string($techArray)) {
-                                $techArray = json_decode($techArray, true);
-                            }
-                        @endphp
-                        
-                        @if($techArray && is_array($techArray))
-                            @foreach(array_slice($techArray, 0, 4) as $tech)
-                            <span class="px-2.5 py-1 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 text-xs rounded-md border border-slate-200 dark:border-white/5">{{ $tech }}</span>
-                            @endforeach
-                        @endif
+
+                <div class="flex flex-1 flex-col p-6">
+                    <h2 class="font-display text-2xl font-extrabold text-slate-950 transition group-hover:text-teal-700 dark:text-white dark:group-hover:text-teal-200">{{ $project->title }}</h2>
+                    <p class="mt-4 flex-1 leading-7 text-slate-700 dark:text-slate-300">{{ \Illuminate\Support\Str::words($project->excerpt, 14) }}</p>
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        @foreach(array_slice($techArray ?? [], 0, 5) as $tech)
+                            <span class="rounded border border-slate-950/10 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">{{ $tech }}</span>
+                        @endforeach
                     </div>
-                    
-                    <a href="{{ route('projects.show', $project->slug) }}" 
-                       class="block w-full text-center bg-slate-100 dark:bg-white/5 hover:bg-indigo-600 dark:hover:bg-indigo-600 text-slate-700 dark:text-white hover:text-white py-3 rounded-xl font-medium transition-all duration-300 border border-slate-200 dark:border-white/5 hover:border-transparent">
-                        View Details
-                    </a>
+                    <a href="{{ route('projects.show', $project->slug) }}" class="btn-secondary mt-7">Open case study</a>
                 </div>
-            </div>
-            @empty
-            <div class="col-span-3 text-center py-20 bg-white dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700">
-                <svg class="w-16 h-16 text-slate-400 dark:text-slate-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                <p class="text-xl text-slate-500 dark:text-slate-400 font-medium">No projects found.</p>
-                <p class="text-slate-400 dark:text-slate-500 mt-2">Try adjusting your filter or check back later.</p>
-            </div>
-            @endforelse
-        </div>
-        
-        @if($projects->hasPages())
-        <div class="mt-16 flex justify-center">
+            </article>
+        @empty
+            <div class="surface rounded-lg p-10 text-center text-slate-600 dark:text-slate-300 lg:col-span-3">No projects found.</div>
+        @endforelse
+    </div>
+
+    @if($projects->hasPages())
+        <div class="mt-12">
             {{ $projects->links('pagination::tailwind') }}
         </div>
-        @endif
-    </div>
-</div>
+    @endif
+</section>
 @endsection
