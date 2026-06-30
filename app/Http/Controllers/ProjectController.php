@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Support\PortfolioProjects;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
@@ -13,21 +14,27 @@ class ProjectController
         try {
             DB::connection()->getPdo();
 
-            $projects = Project::where('published', true)
+            $projectCollection = Project::where('published', true)
                 ->orderBy('sort_order')
-                ->paginate(9);
+                ->get();
 
-            $categories = Project::where('published', true)
-                ->select('category')
-                ->distinct()
-                ->pluck('category');
+            $projectCollection = PortfolioProjects::mergeWith($projectCollection)
+                ->sortBy('sort_order')
+                ->values();
+
+            $projects = $this->paginateCollection($projectCollection, 9);
+
+            $categories = $projectCollection
+                ->pluck('category')
+                ->unique()
+                ->values();
 
             if ($projects->isEmpty()) {
                 throw new \Exception('No projects found');
             }
         } catch (\Exception $e) {
-            $fallback = $this->fallbackProjects();
-            $projects = new LengthAwarePaginator($fallback, $fallback->count(), 9);
+            $fallback = PortfolioProjects::all();
+            $projects = $this->paginateCollection($fallback, 9);
             $categories = $fallback->pluck('category')->unique();
         }
 
@@ -49,7 +56,7 @@ class ProjectController
                 ->limit(3)
                 ->get();
         } catch (\Exception $e) {
-            $fallback = $this->fallbackProjects();
+            $fallback = PortfolioProjects::all();
             $project = $fallback->firstWhere('slug', $project);
 
             abort_if(! $project, 404);
@@ -68,69 +75,40 @@ class ProjectController
         try {
             DB::connection()->getPdo();
 
-            $projects = Project::where('category', $category)
-                ->where('published', true)
+            $projectCollection = Project::where('published', true)
                 ->orderBy('sort_order')
-                ->paginate(9);
+                ->get();
 
-            $allCategories = Project::where('published', true)
-                ->select('category')
-                ->distinct()
-                ->pluck('category');
+            $projectCollection = PortfolioProjects::mergeWith($projectCollection)
+                ->sortBy('sort_order')
+                ->values();
+
+            $projects = $this->paginateCollection(
+                $projectCollection->where('category', $category)->values(),
+                9
+            );
+
+            $allCategories = $projectCollection->pluck('category')->unique()->values();
         } catch (\Exception $e) {
-            $fallback = $this->fallbackProjects()->where('category', $category)->values();
-            $projects = new LengthAwarePaginator($fallback, $fallback->count(), 9);
-            $allCategories = $this->fallbackProjects()->pluck('category')->unique()->values();
+            $fallback = PortfolioProjects::all()->where('category', $category)->values();
+            $projects = $this->paginateCollection($fallback, 9);
+            $allCategories = PortfolioProjects::all()->pluck('category')->unique()->values();
         }
 
         return view('projects.category', compact('projects', 'category', 'allCategories'));
     }
 
-    private function fallbackProjects()
+    private function paginateCollection($items, int $perPage): LengthAwarePaginator
     {
-        return collect([
-            (object) [
-                'title' => 'Baby Day Tracker',
-                'slug' => 'baby-day-tracker',
-                'excerpt' => 'A calm Flutter care companion for feeding, sleep, diapers, vaccines, appointments, memories, reminders, and pediatrician-ready exports.',
-                'category' => 'Mobile App',
-                'technologies' => ['Flutter', 'Dart', 'Riverpod', 'Hive', 'PDF Export'],
-                'cover_image' => 'project-assets/baby-day-phone-collage-classic.png',
-                'featured' => true,
-                'description' => null,
-                'images' => [],
-                'demo_url' => null,
-                'github_url' => null,
-                'published_at' => null,
-            ],
-            (object) [
-                'title' => 'HRIS',
-                'slug' => 'hris',
-                'excerpt' => 'A large Laravel HR operations platform for employee records, PDS data, plantilla, recruitment, competency, reports, monitoring, and admin controls.',
-                'category' => 'Enterprise System',
-                'technologies' => ['Laravel', 'PHP', 'MySQL', 'Blade', 'ApexCharts'],
-                'cover_image' => 'project-assets/hris-dashboard.png',
-                'featured' => true,
-                'description' => null,
-                'images' => [],
-                'demo_url' => null,
-                'github_url' => null,
-                'published_at' => null,
-            ],
-            (object) [
-                'title' => 'ORAS of PPA',
-                'slug' => 'oras-of-ppa',
-                'excerpt' => 'A Laravel + React/Inertia public-service travel appointment and QR verification system for PPA passenger and vessel workflows.',
-                'category' => 'Government Workflow',
-                'technologies' => ['Laravel', 'Inertia React', 'TypeScript', 'Tailwind CSS', 'QR/OTP'],
-                'cover_image' => 'project-assets/oras-language-selection.png',
-                'featured' => true,
-                'description' => null,
-                'images' => [],
-                'demo_url' => null,
-                'github_url' => null,
-                'published_at' => null,
-            ],
-        ]);
+        $items = collect($items)->values();
+        $page = LengthAwarePaginator::resolveCurrentPage();
+
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
     }
 }

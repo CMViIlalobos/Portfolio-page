@@ -1,12 +1,6 @@
 {
-  "node_modules/three/build/three.module.js": {
-    "file": "assets/three.module-BzaJmxKo.js",
-    "name": "three.module",
-    "src": "node_modules/three/build/three.module.js",
-    "isDynamicEntry": true
-  },
   "resources/css/app.css": {
-    "file": "assets/app-C6lGSHGY.css",
+    "file": "assets/app-D90Fu7Kt.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -15,12 +9,9 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-B2sTjazL.js",
+    "file": "assets/app-xdyjz5Z2.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true,
-    "dynamicImports": [
-      "node_modules/three/build/three.module.js"
-    ]
+    "isEntry": true
   }
 }

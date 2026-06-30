@@ -48,8 +48,11 @@
                     </span>
                 </div>
             @else
-                <div class="three-scene h-full min-h-[320px]" data-three-scene="case" aria-label="Animated 3D project case study scene">
-                    <canvas></canvas>
+                <div class="grid h-full min-h-[320px] place-items-center bg-[rgb(var(--brand-soft)/0.55)] p-8">
+                    <div class="text-center">
+                        <span class="card-index">{{ $project->category }}</span>
+                        <p class="mt-3 font-display text-2xl font-bold">{{ $project->title }}</p>
+                    </div>
                 </div>
             @endif
         </div>
@@ -60,7 +63,7 @@
 <section class="section-wrap pb-16">
     <div class="mb-7" data-reveal>
         <p class="eyebrow">Interface samples</p>
-        <h2 class="mt-3 font-display text-2xl font-bold text-slate-950 dark:text-white">Screens from the product</h2>
+        <h2 class="mt-3 font-display text-2xl font-bold">Screens from the product</h2>
     </div>
     <div class="grid gap-4 md:grid-cols-3">
         @foreach($project->images as $image)
@@ -77,34 +80,30 @@
         <p class="eyebrow">Case study</p>
         <div class="mt-6 space-y-6">
             @foreach($descriptionBlocks as $block)
-                <p class="text-sm font-medium leading-7 text-slate-700 dark:text-slate-300">{{ $block }}</p>
+                <p class="text-sm leading-7 text-[rgb(var(--muted))]">{{ $block }}</p>
             @endforeach
         </div>
     </article>
 
     <aside class="grid gap-5 content-start">
-        <div class="three-scene three-scene-small" data-three-scene="case" data-reveal style="--delay: 70ms" aria-label="Animated 3D case study scene">
-            <canvas></canvas>
-        </div>
-
         <div class="surface p-6" data-reveal style="--delay: 90ms">
-            <h2 class="font-display text-lg font-bold text-slate-950 dark:text-white">Project details</h2>
+            <h2 class="font-display text-lg font-bold">Project details</h2>
             <dl class="mt-5 grid gap-4 text-sm">
                 <div>
-                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Category</dt>
-                    <dd class="mt-1 font-bold text-slate-800 dark:text-slate-200">{{ $project->category }}</dd>
+                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[rgb(var(--muted))]">Category</dt>
+                    <dd class="mt-1 font-bold">{{ $project->category }}</dd>
                 </div>
                 <div>
-                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Published</dt>
-                    <dd class="data-mono mt-1 font-bold text-slate-800 dark:text-slate-200">{{ $project->published_at ? $project->published_at->format('Y-m-d') : 'Unpublished' }}</dd>
+                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[rgb(var(--muted))]">Published</dt>
+                    <dd class="data-mono mt-1 font-bold">{{ $project->published_at ? $project->published_at->format('Y-m-d') : 'Unpublished' }}</dd>
                 </div>
                 <div>
-                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Stack</dt>
+                    <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[rgb(var(--muted))]">Stack</dt>
                     <dd class="mt-3 flex flex-wrap gap-2">
                         @forelse($techArray ?? [] as $tech)
                             <span class="tag">{{ $tech }}</span>
                         @empty
-                            <span class="text-xs font-medium text-slate-400">Not listed</span>
+                            <span class="text-xs font-medium text-[rgb(var(--muted))]">Not listed</span>
                         @endforelse
                     </dd>
                 </div>
@@ -112,7 +111,7 @@
         </div>
         <div class="premium-card p-6" data-reveal style="--delay: 160ms">
             <p class="eyebrow">What mattered</p>
-            <ul class="mt-5 space-y-3 text-sm font-medium leading-6 text-slate-600 dark:text-slate-300">
+            <ul class="mt-5 space-y-3 text-sm leading-6 text-[rgb(var(--muted))]">
                 <li>Clear hierarchy for daily use.</li>
                 <li>Reliable records and workflows.</li>
                 <li>Maintainable states and documentation.</li>
@@ -127,7 +126,7 @@
     <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
         <div>
             <p class="eyebrow">Next</p>
-            <h2 class="mt-3 font-display text-2xl font-bold text-slate-950 dark:text-white">Related projects</h2>
+            <h2 class="mt-3 font-display text-2xl font-bold">Related projects</h2>
         </div>
         <a href="{{ route('projects.index') }}" class="btn-secondary">View all</a>
     </div>
