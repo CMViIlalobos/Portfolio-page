@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" x-init="$watch('darkMode', value => localStorage.setItem('darkMode', value))">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
+    @php
+        $siteTitle = trim($__env->yieldContent('title', 'Carlos Miguel S. Villalobos'));
+        $pageDescription = trim($__env->yieldContent('description', 'Carlos Miguel S. Villalobos developer portfolio for Laravel, Flutter, dashboards, workflow systems, APIs, and full-stack product work.'));
+        $canonical = url()->current();
+        $ogImage = asset('project-assets/hris-dashboard.png');
+    @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Carlos Miguel S. Villalobos - full-stack developer portfolio for Laravel, Flutter, HRIS, ORAS, and product dashboards.">
-
-    <title>@yield('title', 'Carlos Miguel S. Villalobos') | Portfolio</title>
-
+    <meta name="description" content="{{ $pageDescription }}">
+    <meta name="theme-color" content="#0f172a">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="canonical" href="{{ $canonical }}">
+
+    <title>{{ $siteTitle }} | Portfolio</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Carlos Miguel S. Villalobos Portfolio">
+    <meta property="og:title" content="{{ $siteTitle }} | Portfolio">
+    <meta property="og:description" content="{{ $pageDescription }}">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $siteTitle }} | Portfolio">
+    <meta name="twitter:description" content="{{ $pageDescription }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
+
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -15,15 +43,54 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+
+    <script type="application/ld+json">
+        {
+            "@@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Carlos Miguel S. Villalobos",
+            "email": "mailto:villaloboscarlosmiguel@gmail.com",
+            "telephone": "+63 908 592 9220",
+            "jobTitle": "Full-stack Developer",
+            "url": "{{ url('/') }}",
+            "sameAs": [
+                "https://www.facebook.com/vcarlosmiguel19",
+                "https://www.instagram.com/villaloboscarll/"
+            ],
+            "knowsAbout": [
+                "Laravel",
+                "Flutter",
+                "MySQL",
+                "Tailwind CSS",
+                "REST APIs",
+                "Workflow systems",
+                "Dashboards"
+            ]
+        }
+    </script>
 </head>
-<body class="page-shell antialiased text-slate-950 transition-colors duration-300 dark:text-slate-100">
-    <div class="mesh-grid pointer-events-none fixed inset-0 z-0"></div>
+<body
+    class="page-shell antialiased"
+    x-data="{
+        darkMode: document.documentElement.classList.contains('dark'),
+        toggleTheme() {
+            this.darkMode = !this.darkMode;
+            document.documentElement.classList.toggle('dark', this.darkMode);
+            localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+        }
+    }"
+>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+    <div class="ambient-grid pointer-events-none fixed inset-0 z-0"></div>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:rounded-md focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-extrabold focus:text-slate-950">
+        Skip to content
+    </a>
 
     @include('partials.navigation')
 
-    <main class="relative z-10 min-h-screen">
+    <main id="main-content" class="page-transition relative z-10 min-h-screen">
         @yield('content')
     </main>
 

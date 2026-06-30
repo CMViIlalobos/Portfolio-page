@@ -1,96 +1,75 @@
 @extends('layouts.app')
 
-@section('title', 'Contact')
+@section('title', 'Contact Carlos Miguel')
+@section('description', 'Contact Carlos Miguel S. Villalobos for Laravel, Flutter, dashboard, workflow system, and full-stack development opportunities.')
 
 @section('content')
-<div class="relative py-20 min-h-screen flex items-center">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[120px] -z-10"></div>
+<section class="section-wrap grid gap-8 pb-24 pt-12 lg:grid-cols-[0.9fr_1.1fr] lg:pt-16">
+    <div class="flex flex-col justify-between gap-8" data-reveal>
+        <div>
+            <p class="eyebrow eyebrow-live">Open to new work</p>
+            <h1 class="display-title mt-5 text-balance">Let's make the next workflow clearer.</h1>
+            <p class="body-lead mt-6 max-w-2xl">
+                I am open to developer roles, Laravel systems, Flutter apps, dashboards, workflow platforms, and focused full-stack product builds.
+            </p>
+        </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            
-            <div class="flex flex-col justify-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">Let's work <br /><span class="text-cyan-400">together.</span></h1>
-                <p class="text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-lg">Send the idea. I’ll help shape the system.</p>
-                
-                <div class="space-y-8">
-                    <div class="flex items-start group">
-                        <div class="flex-shrink-0 w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-cyan-500 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div class="ml-6">
-                            <p class="text-sm font-medium text-slate-500 uppercase tracking-wide">Email</p>
-                            <a href="mailto:villaloboscarlosmiguel@gmail.com" class="text-xl font-semibold text-slate-900 dark:text-white hover:text-cyan-400 transition-colors">villaloboscarlosmiguel@gmail.com</a>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start group">
-                        <div class="flex-shrink-0 w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-cyan-500 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
-                            </svg>
-                        </div>
-                        <div class="ml-6">
-                            <p class="text-sm font-medium text-slate-500 uppercase tracking-wide">Socials</p>
-                            <div class="flex gap-4 mt-1">
-                                <a href="https://www.facebook.com/vcarlosmiguel19" target="_blank" class="text-slate-300 hover:text-white transition-colors">Facebook</a>
-                                <a href="https://www.instagram.com/villaloboscarll/" target="_blank" class="text-slate-300 hover:text-white transition-colors">Instagram</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="grid gap-3">
+            <a href="mailto:villaloboscarlosmiguel@gmail.com" class="surface flex items-center justify-between gap-4 p-4 transition hover:-translate-y-1 hover:border-teal-500">
+                <span>
+                    <span class="block text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Email</span>
+                    <span class="mt-1 block text-sm font-semibold text-slate-950 dark:text-white">villaloboscarlosmiguel@gmail.com</span>
+                </span>
+                <span class="text-teal-700 dark:text-teal-200">Send</span>
+            </a>
+            <a href="tel:+639085929220" class="surface flex items-center justify-between gap-4 p-4 transition hover:-translate-y-1 hover:border-teal-500">
+                <span>
+                    <span class="block text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Phone</span>
+                    <span class="mt-1 block text-sm font-semibold text-slate-950 dark:text-white">0908-592-9220</span>
+                </span>
+                <span class="text-teal-700 dark:text-teal-200">Call</span>
+            </a>
+        </div>
 
-            <div class="bg-slate-800/50 backdrop-blur-xl border border-slate-700 rounded-3xl p-8 lg:p-10 shadow-2xl">
-                <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
-                    @csrf
-                    
-                    @if(session('success'))
-                    <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
-                        <p class="text-green-400 text-sm font-medium flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            {{ session('success') }}
-                        </p>
-                    </div>
-                    @endif
-                    
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-slate-400 mb-2">Full Name</label>
-                        <input type="text" name="name" id="name" required
-                               class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
-                               placeholder="Your Name">
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
-                        <input type="email" name="email" id="email" required
-                               class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
-                               placeholder="your.email@example.com">
-                    </div>
-                    
-                    <div>
-                        <label for="subject" class="block text-sm font-medium text-slate-400 mb-2">Subject</label>
-                        <input type="text" name="subject" id="subject" required
-                               class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
-                               placeholder="Project Inquiry">
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-slate-400 mb-2">Message</label>
-                        <textarea name="message" id="message" rows="5" required
-                                  class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none"
-                                  placeholder="Tell me about your project..."></textarea>
-                    </div>
-                    
-                    <button type="submit"
-                            class="w-full bg-gradient-to-r from-teal-600 to-slate-950 text-white py-4 px-6 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] transition-all duration-300 transform hover:-translate-y-1">
-                        Send Message
-                    </button>
-                </form>
-            </div>
+        <div class="three-scene three-scene-small" data-three-scene="contact" aria-label="Animated 3D contact signal scene">
+            <canvas></canvas>
         </div>
     </div>
-</div>
+
+    <div class="surface p-5 md:p-7" data-reveal style="--delay: 120ms">
+        @if(session('success'))
+            <div class="mb-5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-bold text-emerald-700 dark:text-emerald-200" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('contact.send') }}" method="POST" class="grid gap-5" novalidate>
+            @csrf
+            <div class="grid gap-5 sm:grid-cols-2">
+                <label class="grid gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400" for="name">
+                    Full name
+                    <input id="name" name="name" type="text" value="{{ old('name') }}" required class="field normal-case tracking-normal" placeholder="Your name" aria-invalid="@error('name') true @enderror" aria-describedby="@error('name') name-error @enderror">
+                    @error('name')<span id="name-error" class="error-text">{{ $message }}</span>@enderror
+                </label>
+                <label class="grid gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400" for="email">
+                    Email
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" required class="field normal-case tracking-normal" placeholder="you@example.com" aria-invalid="@error('email') true @enderror" aria-describedby="@error('email') email-error @enderror">
+                    @error('email')<span id="email-error" class="error-text">{{ $message }}</span>@enderror
+                </label>
+            </div>
+            <label class="grid gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400" for="subject">
+                Subject
+                <input id="subject" name="subject" type="text" value="{{ old('subject') }}" required class="field normal-case tracking-normal" placeholder="Developer role or project inquiry" aria-invalid="@error('subject') true @enderror" aria-describedby="@error('subject') subject-error @enderror">
+                @error('subject')<span id="subject-error" class="error-text">{{ $message }}</span>@enderror
+            </label>
+            <label class="grid gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400" for="message">
+                Message
+                <textarea id="message" name="message" rows="7" required class="field resize-none normal-case tracking-normal" placeholder="Tell me about the system, app, dashboard, or product you want to build." aria-invalid="@error('message') true @enderror" aria-describedby="@error('message') message-error @enderror">{{ old('message') }}</textarea>
+                @error('message')<span id="message-error" class="error-text">{{ $message }}</span>@enderror
+            </label>
+            <button type="submit" class="btn-primary w-full" data-magnetic>Send message</button>
+            <p class="text-center text-xs font-medium text-slate-500 dark:text-slate-400">Replies usually land within one business day.</p>
+        </form>
+    </div>
+</section>
 @endsection

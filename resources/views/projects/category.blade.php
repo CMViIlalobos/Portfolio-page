@@ -1,61 +1,52 @@
 @extends('layouts.app')
 
 @section('title', $category . ' Projects')
+@section('description', 'Portfolio projects in the ' . $category . ' category by Carlos Miguel S. Villalobos.')
 
 @section('content')
-<section class="section-wrap py-16 md:py-20">
-    <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-        <div>
-            <p class="eyebrow mb-4">{{ $category }}</p>
-            <h1 class="font-display text-5xl font-extrabold text-slate-950 dark:text-white md:text-6xl">Focused work.</h1>
-            <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300">Projects shaped around {{ $category }} outcomes.</p>
-        </div>
-        <a href="{{ route('projects.index') }}" class="btn-secondary w-fit">Back to all</a>
+<section class="section-wrap grid gap-10 pb-12 pt-12 md:pb-16 md:pt-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+    <div class="max-w-4xl" data-reveal>
+        <p class="eyebrow">Focused work</p>
+        <h1 class="display-title mt-5 text-balance">{{ $category }} projects shaped for clarity.</h1>
+        <p class="body-lead mt-6 max-w-2xl">
+            A focused view of work connected to {{ $category }} outcomes, product behavior, and system design.
+        </p>
     </div>
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+    <div class="three-scene three-scene-page" data-three-scene="projects" data-reveal style="--delay: 120ms" aria-label="Animated 3D category gallery scene">
+        <canvas></canvas>
+    </div>
+
+    <nav class="flex flex-wrap gap-2 lg:col-span-2" data-reveal style="--delay: 80ms" aria-label="Filter projects by category">
+        <a
+            href="{{ route('projects.index') }}"
+            class="tag hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-200"
+        >All</a>
+        @foreach(($allCategories ?? collect([$category])) as $cat)
+            <a
+                href="{{ route('projects.category', $cat) }}"
+                class="tag {{ $cat === $category ? 'border-slate-950 bg-slate-950 text-white dark:border-white dark:bg-white dark:text-slate-950' : 'hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-200' }}"
+                @if($cat === $category) aria-current="page" @endif
+            >{{ $cat }}</a>
+        @endforeach
+    </nav>
+</section>
+
+<section class="section-wrap pb-24">
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         @forelse($projects as $project)
-            @php
-                $techArray = is_string($project->technologies) ? json_decode($project->technologies, true) : $project->technologies;
-            @endphp
-            <article class="surface group flex min-h-[500px] flex-col overflow-hidden rounded-lg transition duration-500 hover:-translate-y-1">
-                <div class="project-visual p-5 text-white">
-                    @if(!empty($project->cover_image))
-                        <div class="h-64 overflow-hidden rounded-md border border-white/10 bg-white/10">
-                            <img src="{{ asset($project->cover_image) }}" alt="{{ $project->title }} interface preview" class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]">
-                        </div>
-                    @else
-                    <div class="rounded-md border border-white/10 bg-white/10 p-4">
-                        <div class="mb-5 flex items-center justify-between">
-                            <span class="rounded bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-950">{{ $project->category }}</span>
-                            <span class="text-xs font-black uppercase tracking-[0.16em] text-teal-200">Case</span>
-                        </div>
-                        <div class="grid grid-cols-5 gap-2">
-                            @for($i = 1; $i <= 20; $i++)
-                                <span class="h-8 rounded {{ $i % 3 === 0 ? 'bg-sky-300' : ($i % 7 === 0 ? 'bg-amber-300' : 'bg-white/15') }}"></span>
-                            @endfor
-                        </div>
-                    </div>
-                    @endif
-                </div>
-                <div class="flex flex-1 flex-col p-6">
-                    <h2 class="font-display text-2xl font-extrabold text-slate-950 dark:text-white">{{ $project->title }}</h2>
-                    <p class="mt-4 flex-1 leading-7 text-slate-700 dark:text-slate-300">{{ \Illuminate\Support\Str::words($project->excerpt, 14) }}</p>
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        @foreach(array_slice($techArray ?? [], 0, 5) as $tech)
-                            <span class="rounded border border-slate-950/10 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">{{ $tech }}</span>
-                        @endforeach
-                    </div>
-                    <a href="{{ route('projects.show', $project->slug) }}" class="btn-secondary mt-7">Open case study</a>
-                </div>
-            </article>
+            <x-project-card :project="$project" :index="$loop->index" />
         @empty
-            <div class="surface rounded-lg p-10 text-center text-slate-600 dark:text-slate-300 lg:col-span-3">No projects found in this category.</div>
+            <div class="surface p-12 text-center lg:col-span-3">
+                <p class="font-display text-xl font-bold text-slate-950 dark:text-white">No {{ $category }} projects yet.</p>
+                <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">This category is still being built out — browse everything else in the meantime.</p>
+                <a href="{{ route('projects.index') }}" class="btn-primary mt-6">Browse all projects</a>
+            </div>
         @endforelse
     </div>
 
     @if($projects->hasPages())
-        <div class="mt-12">
+        <div class="mt-14 flex justify-center">
             {{ $projects->links('pagination::tailwind') }}
         </div>
     @endif

@@ -34,13 +34,31 @@ class ProjectController
         return view('projects.index', compact('projects', 'categories'));
     }
 
-    public function show(Project $project)
+    public function show(string $project)
     {
-        $relatedProjects = Project::where('published', true)
-            ->whereKeyNot($project->id)
-            ->orderBy('sort_order')
-            ->limit(3)
-            ->get();
+        try {
+            DB::connection()->getPdo();
+
+            $project = Project::where('slug', $project)
+                ->where('published', true)
+                ->firstOrFail();
+
+            $relatedProjects = Project::where('published', true)
+                ->whereKeyNot($project->id)
+                ->orderBy('sort_order')
+                ->limit(3)
+                ->get();
+        } catch (\Exception $e) {
+            $fallback = $this->fallbackProjects();
+            $project = $fallback->firstWhere('slug', $project);
+
+            abort_if(! $project, 404);
+
+            $relatedProjects = $fallback
+                ->where('slug', '!=', $project->slug)
+                ->take(3)
+                ->values();
+        }
 
         return view('projects.show', compact('project', 'relatedProjects'));
     }
@@ -54,12 +72,18 @@ class ProjectController
                 ->where('published', true)
                 ->orderBy('sort_order')
                 ->paginate(9);
+
+            $allCategories = Project::where('published', true)
+                ->select('category')
+                ->distinct()
+                ->pluck('category');
         } catch (\Exception $e) {
             $fallback = $this->fallbackProjects()->where('category', $category)->values();
             $projects = new LengthAwarePaginator($fallback, $fallback->count(), 9);
+            $allCategories = $this->fallbackProjects()->pluck('category')->unique()->values();
         }
 
-        return view('projects.category', compact('projects', 'category'));
+        return view('projects.category', compact('projects', 'category', 'allCategories'));
     }
 
     private function fallbackProjects()
@@ -73,6 +97,11 @@ class ProjectController
                 'technologies' => ['Flutter', 'Dart', 'Riverpod', 'Hive', 'PDF Export'],
                 'cover_image' => 'project-assets/baby-day-phone-collage-classic.png',
                 'featured' => true,
+                'description' => null,
+                'images' => [],
+                'demo_url' => null,
+                'github_url' => null,
+                'published_at' => null,
             ],
             (object) [
                 'title' => 'HRIS',
@@ -82,6 +111,11 @@ class ProjectController
                 'technologies' => ['Laravel', 'PHP', 'MySQL', 'Blade', 'ApexCharts'],
                 'cover_image' => 'project-assets/hris-dashboard.png',
                 'featured' => true,
+                'description' => null,
+                'images' => [],
+                'demo_url' => null,
+                'github_url' => null,
+                'published_at' => null,
             ],
             (object) [
                 'title' => 'ORAS of PPA',
@@ -91,6 +125,11 @@ class ProjectController
                 'technologies' => ['Laravel', 'Inertia React', 'TypeScript', 'Tailwind CSS', 'QR/OTP'],
                 'cover_image' => 'project-assets/oras-language-selection.png',
                 'featured' => true,
+                'description' => null,
+                'images' => [],
+                'demo_url' => null,
+                'github_url' => null,
+                'published_at' => null,
             ],
         ]);
     }
