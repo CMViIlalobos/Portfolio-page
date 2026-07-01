@@ -1,6 +1,8 @@
 {
     "version": 2,
-    "buildCommand": "npm ci --include=dev && npm run build",
+    "installCommand": "npm ci --include=dev",
+    "buildCommand": "npm run build",
+    "outputDirectory": "public",
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.9.0",
@@ -14,11 +16,11 @@
             "dest": "/public/build/$1"
         },
         {
-            "src": "/(favicon\\.ico|robots\\.txt)",
+            "src": "/(favicon\\.ico|favicon\\.svg|robots\\.txt)",
             "dest": "/public/$1"
         },
         {
-            "src": "/(assets|css|js|images|storage)/(.*)",
+            "src": "/(assets|css|js|images|project-assets|resume|storage)/(.*)",
             "dest": "/public/$1/$2"
         },
         {
@@ -40,7 +42,7 @@
         "APP_ROUTES_CACHE": "/tmp/routes.php",
         "APP_SERVICES_CACHE": "/tmp/services.php",
         "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
+        "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
         "QUEUE_CONNECTION": "sync",
         "FILESYSTEM_DISK": "public"
