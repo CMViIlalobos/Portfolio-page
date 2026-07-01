@@ -29,24 +29,38 @@
                         <span></span>
                         <i></i>
                     </div>
-                    <div class="project-landing-preview__hero">
-                        <span>{{ $project->category }}</span>
-                        <strong>{{ $project->title }}</strong>
-                        <p>{{ \Illuminate\Support\Str::words($project->excerpt, 8) }}</p>
-                    </div>
-                    <div class="project-landing-preview__cta"></div>
-                    <div class="project-landing-preview__content">
-                        <div class="project-landing-preview__side">
+                    <div class="project-landing-preview__screen">
+                        <aside class="project-landing-preview__sidebar" aria-hidden="true">
+                            <b></b>
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                        </div>
-                        <div class="project-landing-preview__main">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        </aside>
+                        <div class="project-landing-preview__workspace">
+                            <div class="project-landing-preview__hero">
+                                <span>{{ $project->category }}</span>
+                                <strong>{{ $project->title }}</strong>
+                                <p>{{ \Illuminate\Support\Str::words($project->excerpt, 9) }}</p>
+                            </div>
+                            <div class="project-landing-preview__metrics" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="project-landing-preview__content" aria-hidden="true">
+                                <div class="project-landing-preview__chart">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="project-landing-preview__panel">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

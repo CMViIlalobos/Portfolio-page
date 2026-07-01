@@ -28,6 +28,7 @@ class PortfolioProjects
                 'excerpt' => 'A boilerplate and starter kit for launching SaaS applications faster with authentication, payments, dashboards, and more.',
                 'category' => 'SaaS',
                 'technologies' => ['Next.js', 'Tailwind CSS', 'Stripe', 'PostgreSQL', 'Auth.js'],
+                'cover_image' => 'project-assets/launchkit-saas.png',
                 'sort_order' => 4,
             ]),
             self::make([
@@ -36,6 +37,7 @@ class PortfolioProjects
                 'excerpt' => 'A restaurant website with online reservations, digital menu, and admin dashboard for order and table management.',
                 'category' => 'Web App',
                 'technologies' => ['React', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Resend'],
+                'cover_image' => 'project-assets/harbor-cafe.png',
                 'sort_order' => 5,
             ]),
             self::make([
@@ -44,6 +46,7 @@ class PortfolioProjects
                 'excerpt' => 'A property management platform for real estate agencies to manage listings, clients, and transactions efficiently.',
                 'category' => 'SaaS',
                 'technologies' => ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS'],
+                'cover_image' => 'project-assets/estateflow.png',
                 'sort_order' => 6,
                 'demo_url' => route('demos.real-estate', [], false),
             ]),
@@ -53,6 +56,7 @@ class PortfolioProjects
                 'excerpt' => 'A queue and appointment management system for clinics and hospitals to streamline patient flow and scheduling.',
                 'category' => 'SaaS',
                 'technologies' => ['React', 'Node.js', 'PostgreSQL', 'Socket.io', 'Tailwind CSS'],
+                'cover_image' => 'project-assets/clinicqueue.png',
                 'sort_order' => 7,
             ]),
             self::make([
@@ -61,6 +65,7 @@ class PortfolioProjects
                 'excerpt' => 'A modern project management tool for teams to organize tasks, collaborate, and track progress in real time.',
                 'category' => 'SaaS',
                 'technologies' => ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'Pusher'],
+                'cover_image' => 'project-assets/taskpilot.png',
                 'sort_order' => 8,
             ]),
             self::make([
@@ -69,6 +74,7 @@ class PortfolioProjects
                 'excerpt' => 'A portfolio builder platform for developers and designers to create beautiful, responsive portfolios without code.',
                 'category' => 'SaaS',
                 'technologies' => ['Next.js', 'Tailwind CSS', 'MDX', 'Vercel', 'PostgreSQL'],
+                'cover_image' => 'project-assets/portfolio-studio.png',
                 'sort_order' => 9,
             ]),
         ]);
