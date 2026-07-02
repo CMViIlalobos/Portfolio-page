@@ -39,6 +39,14 @@
     "VIEW_COMPILED_PATH": "/tmp",
     "CACHE_STORE": "array",
     "SESSION_DRIVER": "cookie",
+    "MAIL_MAILER": "smtp",
+    "MAIL_SCHEME": "smtp",
+    "MAIL_HOST": "smtp.gmail.com",
+    "MAIL_PORT": "587",
+    "MAIL_USERNAME": "villaloboscarlosmiguel@gmail.com",
+    "MAIL_FROM_ADDRESS": "villaloboscarlosmiguel@gmail.com",
+    "MAIL_FROM_NAME": "Carl Villalobos",
+    "CONTACT_MAIL_TO": "villaloboscarlosmiguel@gmail.com",
     "QUEUE_CONNECTION": "sync",
     "FILESYSTEM_DISK": "public"
   }
