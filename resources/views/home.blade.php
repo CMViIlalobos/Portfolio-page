@@ -114,8 +114,8 @@
     </div>
 </section>
 
-<section id="skills" class="section-wrap pb-20">
-    <div class="grid gap-4 md:grid-cols-2">
+<section id="skills" class="home-mobile-section section-wrap pb-20">
+    <div class="home-skills-grid grid gap-4 lg:grid-cols-2">
         @foreach($skills as $title => $body)
             <article class="minimal-card p-6" data-reveal style="--delay: {{ $loop->index * 70 }}ms">
                 <span class="card-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
@@ -126,7 +126,7 @@
     </div>
 </section>
 
-<section id="projects" class="section-wrap section-pad border-top-soft">
+<section id="projects" class="home-mobile-section section-wrap section-pad border-top-soft">
     <div class="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between" data-reveal>
         <div class="max-w-3xl">
             <p class="eyebrow">Featured work</p>

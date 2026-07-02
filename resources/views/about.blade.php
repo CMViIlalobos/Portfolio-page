@@ -26,7 +26,11 @@
     </div>
 
     <aside class="side-col" data-reveal style="--delay: 120ms">
-        <div class="circle-accent"></div>
+        <div class="portrait-orbit" aria-label="Portrait of Carlos Miguel S. Villalobos">
+            <span class="portrait-ring portrait-ring-one" aria-hidden="true"></span>
+            <span class="portrait-ring portrait-ring-two" aria-hidden="true"></span>
+            <img src="{{ asset('project-assets/carl-villalobos-portrait.png') }}" alt="Carlos Miguel S. Villalobos illustrated portrait" loading="eager">
+        </div>
         <div class="vertical-text">Design and Build</div>
     </aside>
 </section>
