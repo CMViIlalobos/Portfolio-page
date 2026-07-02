@@ -117,4 +117,6 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'contact_to' => env('CONTACT_MAIL_TO', 'villaloboscarlosmiguel@gmail.com'),
+
 ];

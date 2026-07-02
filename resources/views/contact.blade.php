@@ -39,6 +39,12 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="mb-5 border border-[rgb(var(--danger)/0.35)] bg-[rgb(var(--danger)/0.08)] p-4 text-sm font-bold text-[rgb(var(--danger))]" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <form action="{{ route('contact.send') }}" method="POST" class="grid gap-5" novalidate>
             @csrf
             <div class="grid gap-5 sm:grid-cols-2">
