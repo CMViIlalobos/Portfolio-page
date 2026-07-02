@@ -55,7 +55,7 @@
     ];
 @endphp
 
-<section class="hero-editorial section-wrap">
+<section class="home-hero hero-editorial section-wrap">
     <div class="main-col" data-reveal>
         <p class="eyebrow">Full stack developer</p>
         <h1 class="display-title mt-5 text-balance">
@@ -65,7 +65,7 @@
         <p class="body-lead mt-7 max-w-2xl">
             I am Carlos Miguel S. Villalobos. I build Laravel systems, Flutter apps, dashboards, and workflow products that feel calm, readable, and dependable.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
+        <div class="home-hero-actions mt-8 flex flex-wrap gap-3">
             <a href="#projects" class="btn-primary" data-magnetic>View work</a>
             <a href="mailto:villaloboscarlosmiguel@gmail.com" class="btn-ghost">Email me</a>
         </div>
@@ -115,7 +115,7 @@
 </section>
 
 <section id="skills" class="home-mobile-section section-wrap pb-20">
-    <div class="home-skills-grid grid gap-4 lg:grid-cols-2">
+    <div class="home-skills-grid">
         @foreach($skills as $title => $body)
             <article class="minimal-card p-6" data-reveal style="--delay: {{ $loop->index * 70 }}ms">
                 <span class="card-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
